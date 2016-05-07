@@ -37,6 +37,7 @@ static void BM_Sequential(benchmark::State& state) {
   ValueType v = 42;
   while (state.KeepRunning()) {
     Container c;
+    c.reserve(state.range_x());
     for (int i = state.range_x(); --i; )
       c.push_back(v);
   }
