@@ -12,5 +12,13 @@ The machine used was an Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz and 4GB RAM.
 | --- | --- | --- | --- | --- |
 | Create an empty vector | vector<int> v1 | less than 2 nanoseconds | N = 1 | 1% |
 | Push back N items | v3.push_back(...) | 2.57084 * N nanoseconds | N <= 64000 | 13% |
-| Find | find(v1.begin(), v1.end(), item) | 0.385456 * N nanoseconds | N <= 64000 | 18% |
+| Lookup | find(v1.begin(), v1.end(), item) | 0.385456 * N nanoseconds | N <= 64000 | 18% |
 | Access | v1.at(500) | less than 2 nanoseconds | N <= 64000 | 1% |
+
+#### Cost of C++ Map Operations
+###### m1 and m2 are length-n std::map<int, int> and m3 is an empty map
+| Operation | Command | Running Time | Size | RMS error |
+| --- | --- | --- | --- | --- |
+| Create an empty map | map<int, int> m1 | less than 2 nanoseconds | N = 1 | 1% |
+| Insert N items | m3.insert(...) | 0.173852 * N * lg(N) nanoseconds | N <= 64000 | 17% |
+| Lookup | m1.find(...) | 0.77896 * lg(N) nanoseconds | N <= 64000 | 20% |
