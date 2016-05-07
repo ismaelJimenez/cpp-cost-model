@@ -51,7 +51,7 @@ static void BM_Sequential(benchmark::State& state) {
 static void BM_Void(benchmark::State& state) {
   while (state.KeepRunning()) {}
 }
-/*
+
 ////////////////////////////////////  NUMERICS ////////////////////////////////////
 
 static void BM_PowOfTwo(benchmark::State& state) {
@@ -118,7 +118,7 @@ static void BM_ConvertFromStringToInt(benchmark::State& state) {
 }
 BENCHMARK(BM_ConvertFromStringToInt)
 	->Arg(1)->Arg(2)->Arg(4)->Arg(8);
-*/
+
 ////////////////////////////////////  VECTORS ////////////////////////////////////
 
 class VectorFixture : public ::benchmark::Fixture {
@@ -180,7 +180,17 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorSort)(benchmark::State& state) {
 BENCHMARK_REGISTER_F(VectorFixture, VectorSort)
 	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
 
-/*
+BENCHMARK_DEFINE_F(VectorFixture, VectorCopy)(benchmark::State& state) {
+  while (state.KeepRunning()) {
+      std::vector<int> copy = v;
+      (void)copy;
+  }
+  state.SetItemsProcessed(state.iterations());
+}
+BENCHMARK_REGISTER_F(VectorFixture, VectorCopy)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
+
+
 ////////////////////////////////////  MAPS ////////////////////////////////////
 
 class MapFixture : public ::benchmark::Fixture {
@@ -227,5 +237,15 @@ static void BM_SequentialMap(benchmark::State& state) {
 }
 BENCHMARK(BM_SequentialMap)
 	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-*/
+
+BENCHMARK_DEFINE_F(MapFixture, MapCopy)(benchmark::State& state) {
+  while (state.KeepRunning()) {
+      std::map<int, int> copy = m;
+      (void)copy;
+  }
+  state.SetItemsProcessed(state.iterations());
+}
+BENCHMARK_REGISTER_F(MapFixture, MapCopy)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
+
 BENCHMARK_MAIN()

@@ -207,9 +207,9 @@ def readInput(argv):
 
 def main(argv):
 	tests_result = readInput(argv)
-        #test_number(tests_result)
+        test_number(tests_result)
 	test_vector(tests_result)
-        #test_map(tests_result)
+        test_map(tests_result)
 
 def test_number(tests_result):
     print_test_results(
@@ -289,13 +289,19 @@ def test_vector(tests_result):
     print_test_results(
         "Vector Benchmark 5 : Reverse a vector of size N",
         "VectorReverse",
-        ("n",),         # ("n**2","n*lg(n)","n","1")
+        ("n/2",),         # ("n**2","n*lg(n)","n","1")
         tests_result)
 
     print_test_results(
         "Vector Benchmark 6 : Sort a vector of size N",
         "VectorSort",
         ("n*lg(n)",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Vector Benchmark 7 : Copy a vector of size N",
+        "VectorCopy",
+        ("n",),         # ("n**2","n*lg(n)","n","1")
         tests_result)
 
 def test_map(tests_result):
@@ -315,6 +321,12 @@ def test_map(tests_result):
         "Map Benchmark 3 : Lookup on a map of size N",
         "MapLookup",
         ("lg(n)",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Map Benchmark 4 : Copy a map of size N",
+        "MapCopy",
+        ("n",),              # ("n**2","n*lg(n)","n","1")
         tests_result)
 
 if __name__ == "__main__":
