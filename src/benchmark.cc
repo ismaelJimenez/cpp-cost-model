@@ -32,6 +32,16 @@ std::map<int, int> ConstructRandomMap(int size) {
   return m;
 }
 
+std::unordered_map<int, int> ConstructRandomUnorderedMap(int size) {
+  std::unordered_map<int, int> m;
+  m.reserve(size*1.3);
+  for (int i = 0; i < size; ++i) {
+    m.insert(std::make_pair(rand() % size, rand() % size));
+  }
+  return m;
+}
+
+
 template<typename Container, typename ValueType = typename Container::value_type>
 static void BM_Sequential(benchmark::State& state) {
   ValueType v = 42;
@@ -190,7 +200,6 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorCopy)(benchmark::State& state) {
 BENCHMARK_REGISTER_F(VectorFixture, VectorCopy)
 	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
 
-
 ////////////////////////////////////  MAPS ////////////////////////////////////
 
 class MapFixture : public ::benchmark::Fixture {
@@ -246,6 +255,64 @@ BENCHMARK_DEFINE_F(MapFixture, MapCopy)(benchmark::State& state) {
   state.SetItemsProcessed(state.iterations());
 }
 BENCHMARK_REGISTER_F(MapFixture, MapCopy)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
+
+
+////////////////////////////////////  UNORDERED MAPS ////////////////////////////////////
+
+class UnorderedMapFixture : public ::benchmark::Fixture {
+ public:
+  void SetUp(const ::benchmark::State& st) {
+    m = ConstructRandomUnorderedMap(st.range_x());
+  }
+
+  void TearDown(const ::benchmark::State&) {
+    m.clear();
+  }
+
+  std::unordered_map<int, int> m;
+};
+
+static void BM_createEmptyUnorderedMap(benchmark::State& state) {
+  while (state.KeepRunning())
+  {
+	std::unordered_map<int, int> m;
+	(void)m;
+  } 
+}
+BENCHMARK(BM_createEmptyUnorderedMap);
+
+static void BM_SequentialUnorderedMap(benchmark::State& state) {
+  std::pair<int, int> v = std::make_pair(42, 55);
+  while (state.KeepRunning()) {
+    std::unordered_map<int, int> c;
+    for (int i = state.range_x(); --i; )
+      c.insert(v);
+  }
+  const size_t items_processed = state.iterations() * state.range_x();
+  state.SetItemsProcessed(items_processed);
+  state.SetBytesProcessed(items_processed * sizeof(v));
+}
+BENCHMARK(BM_SequentialUnorderedMap)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
+
+BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapLookup)(benchmark::State& state) {
+  const int itemNotInVector = state.range_x()*2; // Test worst case scenario (item not in vector)
+  while (state.KeepRunning()) {
+      benchmark::DoNotOptimize(m.find(itemNotInVector));
+  }
+}
+BENCHMARK_REGISTER_F(UnorderedMapFixture, UnorderedMapLookup)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
+
+BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapCopy)(benchmark::State& state) {
+  while (state.KeepRunning()) {
+      std::unordered_map<int, int> copy = m;
+      (void)copy;
+  }
+  state.SetItemsProcessed(state.iterations());
+}
+BENCHMARK_REGISTER_F(UnorderedMapFixture, UnorderedMapCopy)
 	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
 
 BENCHMARK_MAIN()

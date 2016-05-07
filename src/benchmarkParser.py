@@ -210,6 +210,7 @@ def main(argv):
         test_number(tests_result)
 	test_vector(tests_result)
         test_map(tests_result)
+        test_unorderedmap(tests_result)
 
 def test_number(tests_result):
     print_test_results(
@@ -326,6 +327,31 @@ def test_map(tests_result):
     print_test_results(
         "Map Benchmark 4 : Copy a map of size N",
         "MapCopy",
+        ("n",),              # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+def test_unorderedmap(tests_result):
+    print_test_results(
+        "Unordered Map Benchmark 1 : Create an empty map",
+        "createEmptyUnorderedMap",
+        ("1",),              # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Unordered Benchmark 2 : Insert N items",
+        "BM_SequentialUnorderedMap",
+        ("n",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Unordered Map Benchmark 3 : Lookup in unordered map of size N",
+        "UnorderedMapLookup",
+        ("1",),              # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Unordered Map Benchmark 4 : Copy unordered map of size N",
+        "UnorderedMapCopy",
         ("n",),              # ("n**2","n*lg(n)","n","1")
         tests_result)
 
