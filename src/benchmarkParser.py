@@ -208,6 +208,7 @@ def readInput(argv):
 def main(argv):
 	tests_result = readInput(argv)
 	test_vector(tests_result)
+        test_map(tests_result)
 
 def test_vector(tests_result):
     print_test_results(
@@ -217,7 +218,7 @@ def test_vector(tests_result):
         tests_result)
 
     print_test_results(
-        "Vector Benchmark 2 : Vector push back N items",
+        "Vector Benchmark 2 : Push back N items",
         "BM_Sequential<std::vector<int>,int>",
         ("n",),         # ("n**2","n*lg(n)","n","1")
         tests_result)
@@ -232,6 +233,25 @@ def test_vector(tests_result):
         "Vector Benchmark 4 : Lookup on a vector of size N",
         "VectorLookup",
         ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+def test_map(tests_result):
+    print_test_results(
+        "Map Benchmark 1 : Create an empty map",
+        "BM_createEmptyMap",
+        ("1",),               # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Map Benchmark 2 : Insert N items",
+        "BM_SequentialMap",
+        ("n*lg(n)",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Map Benchmark 3 : Lookup on a map of size N",
+        "MapLookup",
+        ("lg(n)",),         # ("n**2","n*lg(n)","n","1")
         tests_result)
 
 if __name__ == "__main__":
