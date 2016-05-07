@@ -24,7 +24,7 @@ Results may differ from the table below due to random run-time variations
 | Operation | Command | Running Time | Size | RMS error |
 | --- | --- | --- | --- | --- |
 | Create an empty vector | vector<int> v1 | less than 2 ns | N = 1 | 1% |
-| Push back N items | v3.push_back(...) | 2.3 * N ns | N <= 64000 | 8% |
+| Push back | v3.push_back(...) | 2.3 ns | N <= 64000 | 8% |
 | Lookup | find(v1.begin(), v1.end(), item) | 0.5 * N ns | N <= 64000 | 8% |
 | Access | v1.at(500) | less than 2 ns | N <= 64000 | 1% |
 | Reverse | reverse(v1.begin(), v1.end()) | 0.8 * (N/2) ns | N <= 64000 | 7% |
@@ -35,13 +35,22 @@ Results may differ from the table below due to random run-time variations
 ###### m1 and m2 are length-n std::map<int, int> and m3 is an empty map
 | Operation | Command | Running Time | Size | RMS error |
 | --- | --- | --- | --- | --- |
-| Create an empty map | map<int, int> m1 | less than 2 ns | N = 1 | 1% |
+| Create an empty map | map<int, int> m3 | less than 2 ns | N = 1 | 1% |
 | Insert N items | m3.insert(...) | 0.17 * N * lg(N) ns | N <= 64000 | 17% |
 | Lookup | m1.find(...) | 0.86 * lg(N) ns | N <= 64000 | 6% |
 | Copy | m2 = m1 | 33.4 * N ns | N <= 64000 | 17% |
 
 Notes:
 * Complexity of map insert is N * log(size+N). As test was performed with an initially empty map, complexity obtained is N * log(N)
+
+#### Cost of C++ Unordered Map Operations
+###### m1 and m2 are length-n std::unordered_map<int, int> and m3 is an empty unordered map
+| Operation | Command | Running Time | Size | RMS error |
+| --- | --- | --- | --- | --- |
+| Create an empty unordered map |  unrodered_map<int, int> m3 | less than 2 ns | N = 1 | 1% |
+| Insert | m3.insert(...) | 35.7 ns | N <= 64000 | 13% |
+| Lookup | m1.find(...) | 17 ns | N <= 64000 | 15% |
+| Copy | m2 = m1 | 31.7 * N ns | N <= 64000 | 7% |
 
 # Example usage
 ### Required libraries
