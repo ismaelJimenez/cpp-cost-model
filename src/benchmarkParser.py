@@ -207,9 +207,9 @@ def readInput(argv):
 
 def main(argv):
 	tests_result = readInput(argv)
-        test_number(tests_result)
+        #test_number(tests_result)
 	test_vector(tests_result)
-        test_map(tests_result)
+        #test_map(tests_result)
 
 def test_number(tests_result):
     print_test_results(
@@ -284,6 +284,18 @@ def test_vector(tests_result):
         "Vector Benchmark 4 : Lookup on a vector of size N",
         "VectorLookup",
         ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Vector Benchmark 5 : Reverse a vector of size N",
+        "VectorReverse",
+        ("n",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Vector Benchmark 6 : Sort a vector of size N",
+        "VectorSort",
+        ("n*lg(n)",),         # ("n**2","n*lg(n)","n","1")
         tests_result)
 
 def test_map(tests_result):

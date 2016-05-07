@@ -51,7 +51,7 @@ static void BM_Sequential(benchmark::State& state) {
 static void BM_Void(benchmark::State& state) {
   while (state.KeepRunning()) {}
 }
-
+/*
 ////////////////////////////////////  NUMERICS ////////////////////////////////////
 
 static void BM_PowOfTwo(benchmark::State& state) {
@@ -118,7 +118,7 @@ static void BM_ConvertFromStringToInt(benchmark::State& state) {
 }
 BENCHMARK(BM_ConvertFromStringToInt)
 	->Arg(1)->Arg(2)->Arg(4)->Arg(8);
-
+*/
 ////////////////////////////////////  VECTORS ////////////////////////////////////
 
 class VectorFixture : public ::benchmark::Fixture {
@@ -164,6 +164,23 @@ BENCHMARK_REGISTER_F(VectorFixture, VectorLookup)
 BENCHMARK_TEMPLATE2(BM_Sequential, std::vector<int>, int)
 	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
 
+BENCHMARK_DEFINE_F(VectorFixture, VectorReverse)(benchmark::State& state) {
+  while (state.KeepRunning()) {
+      std::reverse(v.begin(), v.end());
+  }
+}
+BENCHMARK_REGISTER_F(VectorFixture, VectorReverse)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
+
+BENCHMARK_DEFINE_F(VectorFixture, VectorSort)(benchmark::State& state) {
+  while (state.KeepRunning()) {
+      std::sort(v.begin(), v.end());
+  }
+}
+BENCHMARK_REGISTER_F(VectorFixture, VectorSort)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
+
+/*
 ////////////////////////////////////  MAPS ////////////////////////////////////
 
 class MapFixture : public ::benchmark::Fixture {
@@ -210,5 +227,5 @@ static void BM_SequentialMap(benchmark::State& state) {
 }
 BENCHMARK(BM_SequentialMap)
 	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+*/
 BENCHMARK_MAIN()
