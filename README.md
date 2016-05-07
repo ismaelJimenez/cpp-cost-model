@@ -33,3 +33,15 @@ The machine used was an Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz and 4GB RAM.
 | Create an empty map | map<int, int> m1 | less than 2 ns | N = 1 | 1% |
 | Insert N items | m3.insert(...) | 0.17 * N * lg(N) ns | N <= 64000 | 17% |
 | Lookup | m1.find(...) | 0.78 * lg(N) ns | N <= 64000 | 20% |
+
+# Example usage
+### Required libraries
+* Google Benchmark : https://github.com/google/benchmark
+* Python
+* g++
+* scipy.linalg
+
+### Basic usage
+* Perform make for generate benchmark executable
+* Execute benchmark and redirect output to a file e.g. ./benchmark > out.txt
+* Execute benchmarkParser e.g. python benchmarkParser.py -i out.txt
