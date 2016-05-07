@@ -6,7 +6,7 @@ The experiments are runned for inputs of various size, and then the running time
 
 The machine used was an Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz and 4GB RAM. 
 
-Results may differ from the table below due to random run-time variations
+Results may differ from the table below due to random run-time variations.
 
 #### Cost of C++ Integer Operations
 ###### z is an n-bit numbers and s is an n-digit string
