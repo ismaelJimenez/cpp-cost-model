@@ -22,8 +22,8 @@ The machine used was an Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz and 4GB RAM.
 | Operation | Command | Running Time | Size | RMS error |
 | --- | --- | --- | --- | --- |
 | Create an empty vector | vector<int> v1 | less than 2 ns | N = 1 | 1% |
-| Push back N items | v3.push_back(...) | 2.5 * N ns | N <= 64000 | 13% |
-| Lookup | find(v1.begin(), v1.end(), item) | 0.38 * N ns | N <= 64000 | 18% |
+| Push back N items | v3.push_back(...) | 2.3 * N ns | N <= 64000 | 8% |
+| Lookup | find(v1.begin(), v1.end(), item) | 0.5 * N ns | N <= 64000 | 8% |
 | Access | v1.at(500) | less than 2 ns | N <= 64000 | 1% |
 
 #### Cost of C++ Map Operations
