@@ -207,8 +207,59 @@ def readInput(argv):
 
 def main(argv):
 	tests_result = readInput(argv)
+        test_number(tests_result)
 	test_vector(tests_result)
         test_map(tests_result)
+
+def test_number(tests_result):
+    print_test_results(
+        "Number Benchmark 1 : Time to compute 2**N with pow",
+        "BM_PowOfTwo",
+        ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Number Benchmark 2 : Time to compute 2**N with bit shift",
+        "BM_PowOfTwoWithBitShift",
+        ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Number Benchmark 3 : Time to multiplicate two integers",
+        "BM_IntMultiplication",
+        ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Number Benchmark 4 : Time to divide two integers",
+        "BM_IntDivision",
+        ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Number Benchmark 5 : Time to multiplicate two doubles",
+        "BM_DoubleMultiplication",
+        ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Number Benchmark 6 : Time to divide two doubles",
+        "BM_DoubleDivision",
+        ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Number Benchmark 5 : Convert string to integer",
+        "BM_ConvertFromStringToInt",
+        ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "Number Benchmark 6 : Convert integer to string",
+        "BM_ConvertIntegerToString",
+        ("1",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
 
 def test_vector(tests_result):
     print_test_results(

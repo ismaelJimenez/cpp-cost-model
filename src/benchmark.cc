@@ -51,6 +51,73 @@ static void BM_Void(benchmark::State& state) {
   while (state.KeepRunning()) {}
 }
 
+////////////////////////////////////  NUMERICS ////////////////////////////////////
+
+static void BM_PowOfTwo(benchmark::State& state) {
+  const int size = state.range_x()-1;
+  while (state.KeepRunning())
+    benchmark::DoNotOptimize(pow(2,size));
+}
+BENCHMARK(BM_PowOfTwo)
+	->Arg(4)->Arg(8)->Arg(16)->Arg(32)->Arg(64);
+
+static void BM_PowOfTwoWithBitShift(benchmark::State& state) {
+  const int size = state.range_x()-1;
+  int64_t  z = 1;
+  while (state.KeepRunning())
+    benchmark::DoNotOptimize(z << size);
+}
+BENCHMARK(BM_PowOfTwoWithBitShift)
+	->Arg(4)->Arg(8)->Arg(16)->Arg(32)->Arg(64);
+
+static void BM_IntMultiplication(benchmark::State& state) {
+  int x = std::numeric_limits<int>::max()/3;
+  while (state.KeepRunning()) {
+      benchmark::DoNotOptimize(x*2);
+  }
+}
+BENCHMARK(BM_IntMultiplication);
+
+static void BM_IntDivision(benchmark::State& state) {
+  int x = std::numeric_limits<int>::max();
+  while (state.KeepRunning()) {
+      benchmark::DoNotOptimize(x/2);
+  }
+}
+BENCHMARK(BM_IntDivision);
+
+static void BM_DoubleMultiplication(benchmark::State& state) {
+  double d1 = std::numeric_limits<double>::max()/3;
+  while (state.KeepRunning()) {
+      benchmark::DoNotOptimize(d1*2);
+  }
+}
+BENCHMARK(BM_DoubleMultiplication);
+
+static void BM_DoubleDivision(benchmark::State& state) {
+  double d1 = std::numeric_limits<double>::max();
+  while (state.KeepRunning()) {
+      benchmark::DoNotOptimize(d1/2.5);
+  }
+}
+BENCHMARK(BM_DoubleDivision);
+
+static void BM_ConvertIntegerToString(benchmark::State& state) {
+  const int size = pow(10,state.range_x()-1);
+  while (state.KeepRunning())
+    	benchmark::DoNotOptimize(std::to_string(size));
+}
+BENCHMARK(BM_ConvertIntegerToString)
+	->Arg(1)->Arg(2)->Arg(4)->Arg(8);
+
+static void BM_ConvertFromStringToInt(benchmark::State& state) {
+  std::string x1 = std::string(state.range_x(), '1');
+  while (state.KeepRunning())
+    	benchmark::DoNotOptimize(std::stoi(x1));
+}
+BENCHMARK(BM_ConvertFromStringToInt)
+	->Arg(1)->Arg(2)->Arg(4)->Arg(8);
+
 ////////////////////////////////////  VECTORS ////////////////////////////////////
 
 class VectorFixture : public ::benchmark::Fixture {
