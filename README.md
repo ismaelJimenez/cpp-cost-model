@@ -27,6 +27,8 @@ Results may differ from the table below due to random run-time variations
 | Push back N items | v3.push_back(...) | 2.3 * N ns | N <= 64000 | 8% |
 | Lookup | find(v1.begin(), v1.end(), item) | 0.5 * N ns | N <= 64000 | 8% |
 | Access | v1.at(500) | less than 2 ns | N <= 64000 | 1% |
+| Reverse | reverse(v1.begin(), v1.end()) | 0.480895 * N ns | N <= 64000 | 6% |
+| Sort | sort(v1.begin(), v1.end()) | 1.01305 * N * lg(N) ns | N <= 64000 | 3% |
 
 #### Cost of C++ Map Operations
 ###### m1 and m2 are length-n std::map<int, int> and m3 is an empty map
