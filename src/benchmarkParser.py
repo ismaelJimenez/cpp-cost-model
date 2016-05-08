@@ -207,12 +207,13 @@ def readInput(argv):
 
 def main(argv):
 	tests_result = readInput(argv)
-        test_number(tests_result)
+        test_numeric(tests_result)
+        test_string(tests_result)
 	test_vector(tests_result)
         test_map(tests_result)
         test_unorderedmap(tests_result)
 
-def test_number(tests_result):
+def test_numeric(tests_result):
     print_test_results(
         "Number Benchmark 1 : Time to compute 2**N with pow",
         "BM_PowOfTwo",
@@ -261,6 +262,24 @@ def test_number(tests_result):
         ("1",),         # ("n**2","n*lg(n)","n","1")
         tests_result)
 
+def test_string(tests_result):
+    print_test_results(
+        "String Benchmark 1 : Copy a string of length N",
+        "BM_StringCopy",
+        ("n",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "String Benchmark 2 : Compare two strings of length N",
+        "BM_StringCompare",
+        ("2*n",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
+
+    print_test_results(
+        "String Benchmark 3 : Concatenate two strings of length N",
+        "BM_StringConcatenate",
+        ("2*n",),         # ("n**2","n*lg(n)","n","1")
+        tests_result)
 
 def test_vector(tests_result):
     print_test_results(

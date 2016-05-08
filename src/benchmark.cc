@@ -129,6 +129,37 @@ static void BM_ConvertFromStringToInt(benchmark::State& state) {
 BENCHMARK(BM_ConvertFromStringToInt)
 	->Arg(1)->Arg(2)->Arg(4)->Arg(8);
 
+////////////////////////////////////  STRINGS ////////////////////////////////////
+
+// Define another benchmark
+static void BM_StringCopy(benchmark::State& state) {
+  std::string s1(state.range_x(), '-');
+  std::string copy;
+  while (state.KeepRunning())
+    benchmark::DoNotOptimize(copy = s1);
+}
+BENCHMARK(BM_StringCopy)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000)->Arg(128000)->Arg(256000);
+
+static void BM_StringCompare(benchmark::State& state) {
+  std::string s1(state.range_x(), '-');
+  std::string s2(state.range_x(), '-');
+  while (state.KeepRunning())
+    benchmark::DoNotOptimize(s1.compare(s2));
+}
+BENCHMARK(BM_StringCompare)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000)->Arg(128000)->Arg(256000);
+
+static void BM_StringConcatenate(benchmark::State& state) {
+  std::string s1(state.range_x(), '-');
+  std::string s2(state.range_x(), '-');
+  while (state.KeepRunning())
+    benchmark::DoNotOptimize(s1+s2);
+}
+
+BENCHMARK(BM_StringConcatenate)
+	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000)->Arg(128000)->Arg(256000);
+
 ////////////////////////////////////  VECTORS ////////////////////////////////////
 
 class VectorFixture : public ::benchmark::Fixture {
