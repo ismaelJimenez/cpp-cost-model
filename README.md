@@ -8,7 +8,7 @@ The machine used was an Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz and 4GB RAM.
 
 Results may differ from the table below due to random run-time variations.
 
-#### Cost of C++ Integer Operations
+#### Cost of C++ Numeric Operations
 ###### z is an n-bit numbers and s is an n-digit string
 | Operation | Command | Running Time | Size | RMS error |
 | --- | --- | --- | --- | --- |
@@ -18,6 +18,18 @@ Results may differ from the table below due to random run-time variations.
 | Convert string to integer  | stoi(s) | 23 ns | N <= 8 | 26% |
 | Multiplication (int/double)  | x * y | less than 2 ns |  | 1% |
 | Division (int/double)  | x / y | less than 2 ns |  | 1% |
+
+#### Cost of C++ String Operations
+###### s and t are length-n strings
+| Operation | Command | Running Time | Size | RMS error |
+| --- | --- | --- | --- | --- |
+| Copy | s = t | 0.0284708 * N ns | N <= 256000 | 30% |
+| Compare | s.compare(t) | 0.0344692 * N ns | N <= 256000 | 15% |
+| Concatenate | s + t | 0.133415 * N ns | N <= 256000 | 31% |
+
+Notes:
+*  String comparison complexity is linear in both the compared and comparing string's lengths. So, as a general case it could also be though as (0.0172346 * (size of s + size of t))
+*  String concatenation complexity is linear in the resulting string length. So, as a general case it could also be though as (0.0667073 * (size of s + size of t))
 
 #### Cost of C++ Vector Operations
 ###### v1 and v2 are length-n std::vectors<int> and v3 is an empty vector
