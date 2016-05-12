@@ -1,5 +1,5 @@
 # Cpp Cost Model makefile
-# Written for Cpp Cost Model project by Ismael Jimenez <ijimenezm@hotmail.es>
+# Written for Cpp Cost Model project by Ismael Jimenez
 
 # Set compiler choice
 CC := g++
