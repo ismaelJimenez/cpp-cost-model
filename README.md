@@ -32,7 +32,7 @@ Notes:
 *  String concatenation complexity is linear in the resulting string length. So, as a general case it could also be though as (0.0667073 * (size of s + size of t))
 
 #### Cost of C++ Vector Operations
-###### v1 and v2 are length-n std::vectors<int> and v3 is an empty vector
+###### v1 and v2 are length-n std::vectors< int > and v3 is an empty vector
 | Operation | Command | Running Time | Size | RMS error |
 | --- | --- | --- | --- | --- |
 | Create an empty vector | vector<int> v1 | less than 2 ns | N = 1 | 1% |
@@ -44,7 +44,7 @@ Notes:
 | Copy | v2 = v1 | 0.15 * N ns | N <= 64000 | 16% |
 
 #### Cost of C++ Map Operations
-###### m1 and m2 are length-n std::map<int, int> and m3 is an empty map
+###### m1 and m2 are length-n std::map< int, int > and m3 is an empty map
 | Operation | Command | Running Time | Size | RMS error |
 | --- | --- | --- | --- | --- |
 | Create an empty map | map<int, int> m3 | less than 2 ns | N = 1 | 1% |
@@ -56,7 +56,7 @@ Notes:
 * Complexity of map insert is N * log(size+N). As test was performed with an initially empty map, complexity obtained is N * log(N)
 
 #### Cost of C++ Unordered Map Operations
-###### m1 and m2 are length-n std::unordered_map<int, int> and m3 is an empty unordered map
+###### m1 and m2 are length-n std::unordered_map< int, int > and m3 is an empty unordered map
 | Operation | Command | Running Time | Size | RMS error |
 | --- | --- | --- | --- | --- |
 | Create an empty unordered map |  unrodered_map<int, int> m3 | less than 2 ns | N = 1 | 1% |
