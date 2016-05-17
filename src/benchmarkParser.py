@@ -207,11 +207,11 @@ def readInput(argv):
 
 def main(argv):
 	tests_result = readInput(argv)
-        test_numeric(tests_result)
-        test_string(tests_result)
+    test_numeric(tests_result)
+    test_string(tests_result)
 	test_vector(tests_result)
-        test_map(tests_result)
-        test_unorderedmap(tests_result)
+    test_map(tests_result)
+    test_unorderedmap(tests_result)
 
 def test_numeric(tests_result):
     print_test_results(
@@ -352,7 +352,7 @@ def test_map(tests_result):
 def test_unorderedmap(tests_result):
     print_test_results(
         "Unordered Map Benchmark 1 : Create an empty map",
-        "createEmptyUnorderedMap",
+        "BM_createEmptyUnorderedMap",
         ("1",),              # ("n**2","n*lg(n)","n","1")
         tests_result)
 

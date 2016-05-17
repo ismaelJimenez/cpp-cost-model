@@ -70,7 +70,7 @@ static void BM_PowOfTwo(benchmark::State& state) {
     benchmark::DoNotOptimize(pow(2,size));
 }
 BENCHMARK(BM_PowOfTwo)
-	->Arg(4)->Arg(8)->Arg(16)->Arg(32)->Arg(64);
+	->RangeMultiplier(2)->Range(4, 64);
 
 static void BM_PowOfTwoWithBitShift(benchmark::State& state) {
   const int size = state.range_x()-1;
@@ -79,7 +79,7 @@ static void BM_PowOfTwoWithBitShift(benchmark::State& state) {
     benchmark::DoNotOptimize(z << size);
 }
 BENCHMARK(BM_PowOfTwoWithBitShift)
-	->Arg(4)->Arg(8)->Arg(16)->Arg(32)->Arg(64);
+	->RangeMultiplier(2)->Range(4, 64);
 
 static void BM_IntMultiplication(benchmark::State& state) {
   int x = std::numeric_limits<int>::max()/3;
@@ -119,7 +119,7 @@ static void BM_ConvertIntegerToString(benchmark::State& state) {
     	benchmark::DoNotOptimize(std::to_string(size));
 }
 BENCHMARK(BM_ConvertIntegerToString)
-	->Arg(1)->Arg(2)->Arg(4)->Arg(8);
+  ->RangeMultiplier(2)->Range(1, 8);
 
 static void BM_ConvertFromStringToInt(benchmark::State& state) {
   std::string x1 = std::string(state.range_x(), '1');
@@ -127,7 +127,7 @@ static void BM_ConvertFromStringToInt(benchmark::State& state) {
     	benchmark::DoNotOptimize(std::stoi(x1));
 }
 BENCHMARK(BM_ConvertFromStringToInt)
-	->Arg(1)->Arg(2)->Arg(4)->Arg(8);
+	->RangeMultiplier(2)->Range(1, 8);
 
 ////////////////////////////////////  STRINGS ////////////////////////////////////
 
@@ -139,8 +139,8 @@ static void BM_StringCopy(benchmark::State& state) {
     benchmark::DoNotOptimize(copy = s1);
 }
 BENCHMARK(BM_StringCopy)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000)->Arg(128000)->Arg(256000);
-
+  ->RangeMultiplier(2)->Range(1<<10, 1<<18);
+  
 static void BM_StringCompare(benchmark::State& state) {
   std::string s1(state.range_x(), '-');
   std::string s2(state.range_x(), '-');
@@ -148,7 +148,7 @@ static void BM_StringCompare(benchmark::State& state) {
     benchmark::DoNotOptimize(s1.compare(s2));
 }
 BENCHMARK(BM_StringCompare)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000)->Arg(128000)->Arg(256000);
+	->RangeMultiplier(2)->Range(1<<10, 1<<18);
 
 static void BM_StringConcatenate(benchmark::State& state) {
   std::string s1(state.range_x(), '-');
@@ -158,7 +158,7 @@ static void BM_StringConcatenate(benchmark::State& state) {
 }
 
 BENCHMARK(BM_StringConcatenate)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000)->Arg(128000)->Arg(256000);
+	->RangeMultiplier(2)->Range(1<<10, 1<<18);
 
 ////////////////////////////////////  VECTORS ////////////////////////////////////
 
@@ -192,7 +192,7 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorFind)(benchmark::State& state) {
   }
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorFind)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
+  ->RangeMultiplier(2)->Range(1<<10, 1<<16);;
 
 BENCHMARK_DEFINE_F(VectorFixture, VectorLookup)(benchmark::State& state) {
   while (state.KeepRunning()) {
@@ -200,27 +200,27 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorLookup)(benchmark::State& state) {
   }
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorLookup)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 BENCHMARK_TEMPLATE2(BM_Sequential, std::vector<int>, int)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 BENCHMARK_DEFINE_F(VectorFixture, VectorReverse)(benchmark::State& state) {
   while (state.KeepRunning()) {
       std::reverse(v.begin(), v.end());
   }
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorReverse)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 BENCHMARK_DEFINE_F(VectorFixture, VectorSort)(benchmark::State& state) {
   while (state.KeepRunning()) {
       std::sort(v.begin(), v.end());
   }
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorSort)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 BENCHMARK_DEFINE_F(VectorFixture, VectorCopy)(benchmark::State& state) {
   while (state.KeepRunning()) {
       std::vector<int> copy = v;
@@ -229,8 +229,8 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorCopy)(benchmark::State& state) {
   state.SetItemsProcessed(state.iterations());
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorCopy)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 ////////////////////////////////////  MAPS ////////////////////////////////////
 
 class MapFixture : public ::benchmark::Fixture {
@@ -262,8 +262,8 @@ BENCHMARK_DEFINE_F(MapFixture, MapLookup)(benchmark::State& state) {
   }
 }
 BENCHMARK_REGISTER_F(MapFixture, MapLookup)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 static void BM_SequentialMap(benchmark::State& state) {
   std::pair<int, int> v = std::make_pair(42, 55);
   while (state.KeepRunning()) {
@@ -276,8 +276,8 @@ static void BM_SequentialMap(benchmark::State& state) {
   state.SetBytesProcessed(items_processed * sizeof(v));
 }
 BENCHMARK(BM_SequentialMap)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 BENCHMARK_DEFINE_F(MapFixture, MapCopy)(benchmark::State& state) {
   while (state.KeepRunning()) {
       std::map<int, int> copy = m;
@@ -286,8 +286,7 @@ BENCHMARK_DEFINE_F(MapFixture, MapCopy)(benchmark::State& state) {
   state.SetItemsProcessed(state.iterations());
 }
 BENCHMARK_REGISTER_F(MapFixture, MapCopy)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
 
 ////////////////////////////////////  UNORDERED MAPS ////////////////////////////////////
 
@@ -325,8 +324,8 @@ static void BM_SequentialUnorderedMap(benchmark::State& state) {
   state.SetBytesProcessed(items_processed * sizeof(v));
 }
 BENCHMARK(BM_SequentialUnorderedMap)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapLookup)(benchmark::State& state) {
   const int itemNotInVector = state.range_x()*2; // Test worst case scenario (item not in vector)
   while (state.KeepRunning()) {
@@ -334,8 +333,8 @@ BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapLookup)(benchmark::State& st
   }
 }
 BENCHMARK_REGISTER_F(UnorderedMapFixture, UnorderedMapLookup)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  
 BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapCopy)(benchmark::State& state) {
   while (state.KeepRunning()) {
       std::unordered_map<int, int> copy = m;
@@ -344,6 +343,6 @@ BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapCopy)(benchmark::State& stat
   state.SetItemsProcessed(state.iterations());
 }
 BENCHMARK_REGISTER_F(UnorderedMapFixture, UnorderedMapCopy)
-	->Arg(1000)->Arg(2000)->Arg(4000)->Arg(8000)->Arg(16000)->Arg(32000)->Arg(64000);
-
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+ 
 BENCHMARK_MAIN()
