@@ -206,10 +206,10 @@ def readInput(argv):
     return (tests_result)
 
 def main(argv):
-	tests_result = readInput(argv)
+    tests_result = readInput(argv)
     test_numeric(tests_result)
     test_string(tests_result)
-	test_vector(tests_result)
+    test_vector(tests_result)
     test_map(tests_result)
     test_unorderedmap(tests_result)
 
