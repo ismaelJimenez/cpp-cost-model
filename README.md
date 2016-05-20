@@ -2,7 +2,7 @@
 
 # C++ Running Time Analysis
 
-The experiments are run for inputs of various size, and then the running time is found by a least-squares fit to find the coefficient for the high order term. 
+The experiments are executed for inputs of various size, and then the running time is found by a least-squares fit to find the coefficient for the high order term. 
 
 The machine used was an Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz and 4GB RAM. 
 
