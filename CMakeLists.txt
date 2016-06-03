@@ -6,21 +6,6 @@ project(${PROJECT_NAME_STR})
 # Make sure we can import out CMake functions
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-if (CMAKE_VERSION VERSION_LESS 3.2)
-    set(UPDATE_DISCONNECTED_IF_AVAILABLE "")
-else()
-    set(UPDATE_DISCONNECTED_IF_AVAILABLE "UPDATE_DISCONNECTED 1")
-endif()
-
-include(DownloadProject)
-download_project(PROJ                benchmark
-                 GIT_REPOSITORY      https://github.com/google/benchmark.git
-                 GIT_TAG             master
-                 ${UPDATE_DISCONNECTED_IF_AVAILABLE}
-)
-
-add_subdirectory(${benchmark_SOURCE_DIR} ${benchmark_BINARY_DIR})
-
 # Import our CMake modules
 include(CheckCXXCompilerFlag)
 include(AddCXXCompilerFlag)
@@ -128,6 +113,9 @@ cxx_feature_check(STEADY_CLOCK)
 
 # Ensure we have pthreads
 find_package(Threads REQUIRED)
+
+# Set up directories
+add_subdirectory(${PROJECT_SOURCE_DIR}/ext/benchmark)
 
 # Trivial example using gtest and gmock
 add_executable(${PROJECT_NAME_STR} src/benchmark.cc)
