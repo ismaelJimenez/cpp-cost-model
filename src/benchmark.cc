@@ -192,7 +192,7 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorFind)(benchmark::State& state) {
   }
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorFind)
-  ->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+  ->RangeMultiplier(2)->Range(1<<10, 1<<16);
 
 BENCHMARK_DEFINE_F(VectorFixture, VectorLookup)(benchmark::State& state) {
   while (state.KeepRunning()) {
@@ -200,10 +200,10 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorLookup)(benchmark::State& state) {
   }
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorLookup)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 BENCHMARK_TEMPLATE2(BM_Sequential, std::vector<int>, int)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 BENCHMARK_DEFINE_F(VectorFixture, VectorReverse)(benchmark::State& state) {
   while (state.KeepRunning()) {
@@ -211,7 +211,7 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorReverse)(benchmark::State& state) {
   }
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorReverse)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 BENCHMARK_DEFINE_F(VectorFixture, VectorSort)(benchmark::State& state) {
   while (state.KeepRunning()) {
@@ -219,7 +219,7 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorSort)(benchmark::State& state) {
   }
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorSort)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 BENCHMARK_DEFINE_F(VectorFixture, VectorCopy)(benchmark::State& state) {
   while (state.KeepRunning()) {
@@ -229,7 +229,7 @@ BENCHMARK_DEFINE_F(VectorFixture, VectorCopy)(benchmark::State& state) {
   state.SetItemsProcessed(state.iterations());
 }
 BENCHMARK_REGISTER_F(VectorFixture, VectorCopy)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 ////////////////////////////////////  MAPS ////////////////////////////////////
 
@@ -262,7 +262,7 @@ BENCHMARK_DEFINE_F(MapFixture, MapLookup)(benchmark::State& state) {
   }
 }
 BENCHMARK_REGISTER_F(MapFixture, MapLookup)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 static void BM_SequentialMap(benchmark::State& state) {
   std::pair<int, int> v = std::make_pair(42, 55);
@@ -276,7 +276,7 @@ static void BM_SequentialMap(benchmark::State& state) {
   state.SetBytesProcessed(items_processed * sizeof(v));
 }
 BENCHMARK(BM_SequentialMap)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 BENCHMARK_DEFINE_F(MapFixture, MapCopy)(benchmark::State& state) {
   while (state.KeepRunning()) {
@@ -286,7 +286,7 @@ BENCHMARK_DEFINE_F(MapFixture, MapCopy)(benchmark::State& state) {
   state.SetItemsProcessed(state.iterations());
 }
 BENCHMARK_REGISTER_F(MapFixture, MapCopy)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
 
 ////////////////////////////////////  UNORDERED MAPS ////////////////////////////////////
 
@@ -324,7 +324,7 @@ static void BM_SequentialUnorderedMap(benchmark::State& state) {
   state.SetBytesProcessed(items_processed * sizeof(v));
 }
 BENCHMARK(BM_SequentialUnorderedMap)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapLookup)(benchmark::State& state) {
   const int itemNotInVector = state.range_x()*2; // Test worst case scenario (item not in vector)
@@ -333,7 +333,7 @@ BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapLookup)(benchmark::State& st
   }
 }
 BENCHMARK_REGISTER_F(UnorderedMapFixture, UnorderedMapLookup)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
   
 BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapCopy)(benchmark::State& state) {
   while (state.KeepRunning()) {
@@ -343,6 +343,6 @@ BENCHMARK_DEFINE_F(UnorderedMapFixture, UnorderedMapCopy)(benchmark::State& stat
   state.SetItemsProcessed(state.iterations());
 }
 BENCHMARK_REGISTER_F(UnorderedMapFixture, UnorderedMapCopy)
-	->RangeMultiplier(2)->Range(1<<10, 1<<16);;
+	->RangeMultiplier(2)->Range(1<<10, 1<<16);
  
 BENCHMARK_MAIN()

@@ -1,0 +1,15 @@
+sudo: required
+
+os:
+  - linux
+
+language: cpp
+
+before_script:
+  - mkdir build
+  - cd build
+  - cmake ..
+
+script:
+  - cmake --build .
+
