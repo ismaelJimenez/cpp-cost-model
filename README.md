@@ -64,14 +64,8 @@ Notes:
 | Lookup | m1.find(...) | 17 ns | N <= 64000 | 15% |
 | Copy | m2 = m1 | 31.7 * N ns | N <= 64000 | 7% |
 
-# Example usage
-### Required libraries
-* Google Benchmark : https://github.com/google/benchmark
-* Python
-* g++
-* scipy.linalg
+## Debug vs Release
+By default, benchmark builds as a debug library. You will see a warning in the output when this is the case. To build it as a release library instead, use:
 
-### Basic usage
-* Perform make for generate benchmark executable
-* Execute benchmark and redirect output to a file e.g. ./benchmark > out.txt
-* Execute benchmarkParser e.g. python benchmarkParser.py -i out.txt
+```
+cmake -DCMAKE_BUILD_TYPE=Release
